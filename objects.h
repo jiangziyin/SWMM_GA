@@ -1082,3 +1082,15 @@ typedef struct
    char          Enabled;         // TRUE if appears in report table
    int           Precision;       // number of decimal places when reported
 }  TRptField;
+
+//-------------------
+// Horton ²ÎÊý
+//--------------------
+typedef struct
+{
+	double MaxRate;
+	double MinRate;
+	double Decay;
+	double DryTime;
+	double MaxInfill;
+} HORTON_GA;

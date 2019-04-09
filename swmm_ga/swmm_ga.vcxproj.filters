@@ -53,6 +53,10 @@
     <ClCompile Include="..\transect.c" />
     <ClCompile Include="..\treatmnt.c" />
     <ClCompile Include="..\xsect.c" />
+    <ClCompile Include="..\..\..\TVGM-SWMM-GA\20190402\generation.c" />
+    <ClCompile Include="..\..\..\TVGM-SWMM-GA\20190402\initoop.c" />
+    <ClCompile Include="..\..\..\TVGM-SWMM-GA\20190402\mutation.c" />
+    <ClCompile Include="..\..\..\TVGM-SWMM-GA\20190402\objfunc.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\consts.h" />
