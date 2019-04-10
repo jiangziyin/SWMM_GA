@@ -137,14 +137,18 @@ static int  DoRouting;            // TRUE if flow routing is computed
 
 //-----------------------------------------------------------------
 //遗传算法中的参数
+//Horton: MaxRate, MinRate, Decay, DryTime, MaxInfill 1-3
+
+//曼宁慥率参数： N_imperv, N_perv, Con_Roughness 4-6
+//洼地蓄积量参数：Des_imperv,Des_perv,Zero_Imperv 7-9
 //-----------------------------------------------------------------
-double min[5] = { 20, 0, 0.5, 0.01,0.5 };
-double max[5] = { 100,1,1,1,1 };
+double min[9] = { 25, 0, 2, 0.01,0.1,0.01,0.2,2,5 };
+double max[9] = { 80,10,7,0.033,0.8,0.02,10,10,25 };
 int daishu = 1;
 const int N = 50;
 struct Gene
 {
-	double canshu[5];
+	double canshu[9];
 	double shiyingdu;
 };
 
@@ -316,8 +320,12 @@ void swmm_process(struct Gene geti)
 	HORTON_1.MaxRate = geti.canshu[0];
 	HORTON_1.MinRate = geti.canshu[1];
 	HORTON_1.Decay = geti.canshu[2];
-	HORTON_1.DryTime = geti.canshu[3];
-	HORTON_1.MaxInfill = geti.canshu[4];
+	MANNING.N_imperv = geti.canshu[3];
+	MANNING.N_perv = geti.canshu[4];
+	MANNING.Con_Roughness = geti.canshu[5];
+	DES.Des_imper = geti.canshu[6];
+	DES.Des_perv = geti.canshu[7];
+	DES.Zero_Imperv = geti.canshu[8];
 	swmm_start(TRUE);
 	// --- execute each time step until elapsed time is re-set to 0
 
@@ -377,6 +385,7 @@ int  DLLEXPORT  swmm_run1(char* f1, char* f2, char* f3)
 	fileread("C:\\Users\\Zhang Yin\\Desktop\\UTVGM-SWMM\\TVGM-SWMM-GA\\20190402\\swmm5\\outflow.txt", outflow);
 	double shice = var(outflow, 49);
 	initpoop(geti, min, max, outflow, shice);
+
 	for (j = 0; j < daishu; j++)
 	{
 		generation(geti, min, max, outflow, shice);//交叉操作
@@ -395,7 +404,7 @@ int  DLLEXPORT  swmm_run1(char* f1, char* f2, char* f3)
 	}
 	swmm_process(geti[num]);
 
-	printf("\n shiyingdu=%.3f\nMaxRate=%.3f \nMinRate=%3f \nDecay=%.3f \nDryTime=%.3f \nMaxInfill=%.3f\n", geti[num].shiyingdu,geti[num].canshu[0], geti[num].canshu[1], geti[num].canshu[2], geti[num].canshu[3], geti[num].canshu[4]);
+	printf("\n shiyingdu=%.3f\nMaxRate=%.3f \nMinRate=%.3f \nDecay=%.3f \nDryTime=%.3f \nMaxInfill=%.3f\n", geti[num].shiyingdu,geti[num].canshu[0], geti[num].canshu[1], geti[num].canshu[2], geti[num].canshu[3], geti[num].canshu[4]);
 
 	// --- report results
 	if (Fout.mode == SCRATCH_FILE) swmm_report();

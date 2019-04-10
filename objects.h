@@ -1091,6 +1091,24 @@ typedef struct
 	double MaxRate;
 	double MinRate;
 	double Decay;
-	double DryTime;
-	double MaxInfill;
 } HORTON_GA;
+
+//-------------------
+// 曼宁慥率参数： N_imperv, N_perv, Con_Roughness
+//--------------------
+typedef struct
+{
+	double  N_imperv;
+	double N_perv;
+	double Con_Roughness;
+} MANNINGS;
+
+//-------------------
+// 洼地蓄积量参数：Des_imperv,Des_perv,Zero_Imperv 
+//--------------------
+typedef struct
+{
+	double  Des_imper;
+	double Des_perv;
+	double Zero_Imperv;
+} DESS;
