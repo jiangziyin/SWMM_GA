@@ -309,6 +309,9 @@ int horton_setParams(THorton *infil, double p[])
 {
     int k;
     for (k=0; k<5; k++) if ( p[k] < 0.0 ) return FALSE;
+	p[0] = HORTON_1.MaxRate;
+	p[1] = HORTON_1.MinRate;
+	p[2] = HORTON_1.Decay;
 
     // --- max. & min. infil rates (ft/sec)
     infil->f0   = p[0] / UCF(RAINFALL);
