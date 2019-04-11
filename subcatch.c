@@ -111,6 +111,7 @@ static double findSubareaRunoff(TSubarea* subarea, double tRunoff);            /
 static void   updatePondedDepth(TSubarea* subarea, double* tx);
 static void   getDdDt(double t, double* d, double* dddt);
 
+
 //=============================================================================
 
 int  subcatch_readParams(int j, char* tok[], int ntoks)
@@ -395,7 +396,8 @@ void  subcatch_validate(int j)
 ////        area = nonLidArea;                                                     //(5.1.011)
 /////////////////////////////////////////////////////////////////////
 
-        if ( area > 0.0 && Subcatch[j].subArea[i].N > 0.0 )
+
+		if ( area > 0.0 && Subcatch[j].subArea[i].N > 0.0 )
         {
             Subcatch[j].subArea[i].alpha = MCOEFF * Subcatch[j].width / area *
                 sqrt(Subcatch[j].slope) / Subcatch[j].subArea[i].N;
@@ -689,11 +691,12 @@ double subcatch_getRunoff(int j, double tStep)
 
     // --- examine each type of sub-area (impervious w/o depression storage,
     //     impervious w/ depression storage, and pervious)
-    if ( nonLidArea > 0.0 ) for (i = IMPERV0; i <= PERV; i++)
+
+	if ( nonLidArea > 0.0 ) for (i = IMPERV0; i <= PERV; i++)
     {
         // --- get runoff from sub-area updating Vevap, Vpevap,
         //     Vinfil & Voutflow)
-        area = nonLidArea * Subcatch[j].subArea[i].fArea;
+        area = nonLidArea * Subcatch[j].subArea[i].fArea;		
         Subcatch[j].subArea[i].runoff =
             getSubareaRunoff(j, i, area, netPrecip[i], evapRate, tStep);
         runoff += Subcatch[j].subArea[i].runoff * area;
@@ -748,6 +751,10 @@ double subcatch_getRunoff(int j, double tStep)
     // --- return area-averaged runoff (ft/s)
     return runoff / area;
 }
+
+//=============================================================================
+
+
 
 //=============================================================================
 
@@ -1010,6 +1017,10 @@ double getSubareaInfil(int j, TSubarea* subarea, double precip, double tStep)
 
 ////  This function was modified for release 5.1.008.  ////                    //(5.1.008)
 
+
+
+
+
 double findSubareaRunoff(TSubarea* subarea, double tRunoff)
 //
 //  Purpose: computes runoff (ft/s) from subarea after current time step.
@@ -1021,7 +1032,8 @@ double findSubareaRunoff(TSubarea* subarea, double tRunoff)
     double xDepth = subarea->depth - subarea->dStore;
     double runoff = 0.0;
 
-    if ( xDepth > ZERO )
+	
+	if ( xDepth > ZERO )
     {
         // --- case where nonlinear routing is used
         if ( subarea->N > 0.0 )

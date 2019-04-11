@@ -374,15 +374,22 @@ double horton_getInfil(THorton *infil, double tstep, double irate, double depth)
     double fa, fp = 0.0;
     double Fp, F1, t1, tlim, ex, kt;
     double FF, FF1, r;
-    double f0   = infil->f0 * Adjust.hydconFactor;                             //(5.1.008)
-    double fmin = infil->fmin * Adjust.hydconFactor;                           //(5.1.008)
-    double Fmax = infil->Fmax;
+	//读入遗传算法生成的参数
+	//double f0   = infil->f0 * Adjust.hydconFactor;                             //(5.1.008)
+    //double fmin = infil->fmin * Adjust.hydconFactor;                           //(5.1.008)
+	double f0=HORTON_1.MaxRate/ UCF(RAINFALL)*Adjust.hydconFactor;
+	double fmin=HORTON_1.MinRate / UCF(RAINFALL)*Adjust.hydconFactor;
+	
+	//double Fmax = infil->Fmax;
+	double Fmax = HORTON_1.MaxInfill / UCF(RAINDEPTH);
     double tp   = infil->tp;
     double df   = f0 - fmin;                                                   //(5.1.008)
-    double kd   = infil->decay;
-    double kr   = infil->regen * Evap.recoveryFactor;
-
-    // --- special cases of no infil. or constant infil
+   // double kd   = infil->decay;
+	double kd = HORTON_1.Decay/3600;
+    //double kr   = infil->regen * Evap.recoveryFactor;
+	double kr = (-log(1.0 - 0.98) / HORTON_1.DryTime / SECperDAY)* Evap.recoveryFactor;
+   
+	// --- special cases of no infil. or constant infil
     if ( df < 0.0 || kd < 0.0 || kr < 0.0 ) return 0.0;
     if ( df == 0.0 || kd == 0.0 )
     {
