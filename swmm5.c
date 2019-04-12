@@ -143,7 +143,7 @@ static int  DoRouting;            // TRUE if flow routing is computed
 
 double min[5] = { 15, 1, 2, 0,0 };
 double max[5] = { 80,15,7,10,0.8 };
-int daishu = 1;
+int daishu = 5;
 const int N = 50;
 
 //-----------------------------------------------------------------------------
@@ -370,7 +370,7 @@ int  DLLEXPORT  swmm_run1(char* f1, char* f2, char* f3)
 	int j;
 	double h = daishu;
 	struct Gene geti[50], *p1 = geti;//种群个体数
-	fileread("C:\\Users\\Zhang Yin\\Desktop\\UTVGM-SWMM\\TVGM-SWMM-GA\\20190402\\swmm5\\outflow.txt", outflow);
+	fileread("C:\\Users\\Zhang Yin\\Desktop\\UTVGM-SWMM\\SWMM-GA\\V1\\swmm_ga\\outflow_803.txt", outflow);
 	double shice = var(outflow, 49);
 	initpoop(geti, min, max, outflow, shice);
 	for (j = 0; j < daishu; j++)

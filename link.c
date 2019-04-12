@@ -948,7 +948,7 @@ int  conduit_readParams(int j, int k, char* tok[], int ntoks)
         return error_setInpError(ERR_NUMBER, tok[8]);
     }
 
-	x[1] = MANNING.Con_Roughness;
+
 
     // --- add parameters to data base
     Link[j].ID = id;
