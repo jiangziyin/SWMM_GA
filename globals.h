@@ -161,4 +161,5 @@ EXTERN TShape*    Shape;                    // Array of custom conduit shapes
 EXTERN TEvent*    Event;                    // Array of routing events         //(5.1.011)
 
 EXTERN HORTON_GA HORTON_1;
-
+EXTERN MANNING Mannings;                   //曼宁系数
+EXTERN STORAGES Storages;                 //洼蓄参数

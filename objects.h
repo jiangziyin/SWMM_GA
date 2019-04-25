@@ -1094,3 +1094,16 @@ typedef struct
 	double MaxInfill;
 } HORTON_GA;
 
+typedef struct                   //曼宁系数
+{
+	double          N_Imperv;        //不透水区曼宁系数
+	double          N_Perv;          //透水区曼宁系数
+	double          Rougness;         //管网曼宁系数
+} MANNING;
+
+typedef struct                   //洼地蓄积量参数
+{
+	double          S_Imperv;        //不透水区洼蓄量
+	double          S_Perv;          //透水区洼蓄量
+	double          PctZero;         //无洼蓄不透水率
+} STORAGES;

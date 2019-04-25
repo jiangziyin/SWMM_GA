@@ -233,19 +233,25 @@ int subcatch_readSubareaParams(char* tok[], int ntoks)
 
     // --- assign input values to each type of subarea
    
-	Subcatch[j].subArea[IMPERV0].N = x[0];
-	Subcatch[j].subArea[IMPERV1].N = x[0];
-	Subcatch[j].subArea[PERV].N = x[1];
+	//Subcatch[j].subArea[IMPERV0].N = x[0];
+	//Subcatch[j].subArea[IMPERV1].N = x[0];
+	//Subcatch[j].subArea[PERV].N = x[1];
 
-    
-	Subcatch[j].subArea[IMPERV0].dStore = 0.0;
+ //   
+	//Subcatch[j].subArea[IMPERV0].dStore = 0.0;
+ // Subcatch[j].subArea[IMPERV1].dStore = x[2] / UCF(RAINDEPTH);
+ // Subcatch[j].subArea[PERV].dStore    = x[3] / UCF(RAINDEPTH);
 
-  Subcatch[j].subArea[IMPERV1].dStore = x[2] / UCF(RAINDEPTH);
-  Subcatch[j].subArea[PERV].dStore    = x[3] / UCF(RAINDEPTH);
+ //读入GA生成的参数
+  Subcatch[j].subArea[IMPERV0].N = Mannings.N_Imperv;
+  Subcatch[j].subArea[IMPERV1].N = Mannings.N_Imperv;
+  Subcatch[j].subArea[PERV].N = Mannings.N_Perv;
+
+  Subcatch[j].subArea[IMPERV0].dStore = 0.0;
+  Subcatch[j].subArea[IMPERV1].dStore = Storages.S_Imperv / UCF(RAINDEPTH);
+  Subcatch[j].subArea[PERV].dStore = Storages.S_Perv / UCF(RAINDEPTH);
 
 
-
-	//读入GA生成的参数
 
     Subcatch[j].subArea[IMPERV0].fArea  = Subcatch[j].fracImperv * x[4] / 100.0;
     Subcatch[j].subArea[IMPERV1].fArea  = Subcatch[j].fracImperv * (1.0 - x[4] / 100.0);
